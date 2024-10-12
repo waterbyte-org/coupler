@@ -1,9 +1,9 @@
 /*
  *******************************************************************************
  * Project    ：Coupler
- * Version    ：1.0.0
+ * Version    ：1.1.1
  * File       ：测试用辅助函数
- * Date       ：03/23/2023
+ * Date       ：01/18/2024
  * Author     ：梁小光
  * Copyright  ：福州水字节科技有限公司
  *******************************************************************************
@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include "../../../sdk_v1.3.0/include/swmmkernel/swmmkernel.h"
+#include "swmmkernel/swmmkernel.h"
 
 int disconnect_and_return(int err_id)
 //------------------------------------------------------------------------------

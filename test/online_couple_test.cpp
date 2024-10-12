@@ -1,20 +1,20 @@
 /*
  *******************************************************************************
  * Project    ：Coupler
- * Version    ：1.0.0
+ * Version    ：1.1.1
  * File       ：在线耦合测试
- * Date       ：03/23/2023
+ * Date       ：01/18/2024
  * Author     ：梁小光
  * Copyright  ：福州水字节科技有限公司
  *******************************************************************************
  */
 
-#include <iostream>
-
 #include "idinfo.h"
 #include "globalfun.h"
 #include "../src/couplefun.h"
 #include "../interface/coupler.h"
+
+#include <iostream>
 
 int main()
 {
@@ -70,14 +70,29 @@ int main()
 	ISetup* setup = flood->getSetup();
 	const double start_time = net_copy->getEndRoutingDateTime(); // 可以往后推迟
 	setup->setStartTime(start_time);
-	const double end_time = addDays(start_time, 0.25); // 往后6h=0.25d
+	const double end_time = addDays(start_time, 0.25); // 往后6h = 0.25d
 	setup->setEndTime(end_time);
 
 	// 7. 执行耦合计算
 	if (!onlineCouple(net_copy, flood, geo))
 		return disconnect_and_return(-555);
 
-	// 8. 获取统计数据（边界数据要特殊处理）
+	// 8. 获取统计数据
+	cout << "基于一维模型分析：\n";
+	net_copy->updateSystemStats();
+	ISubNet* subnet = net_copy->getSubNet(0);
+	INodeStatsSet* inss = subnet->getNodeStatsSet();
+	cout << "永久溢流水量：" << inss->getTotalOverFlow() << "m3\n";
+
+	char name[64]; // 占位用
+	double pond_volume = 0.0;	
+	for (int i = 0; i < subnet->getNodeCounts(); ++i)
+	{
+		INode* node = subnet->getNodeObjectAndName(name, i);
+		pond_volume += node->getStats()->getPondedVolume();
+	}
+	cout << "没来得及回到系统的积水量：" << pond_volume << "m3\n";
+	cout << "基于二维模型分析：\n";
 	cout << "总降雨量为：" << flood->getRainVolume()   << "m3\n";
 	cout << "总入流量为：" << flood->getInflowVolume() << "m3\n";
 	cout << "总积水量为：" << flood->getPondVolume()   << "m3\n";

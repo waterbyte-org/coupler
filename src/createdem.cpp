@@ -1,9 +1,9 @@
 ﻿/*
  *******************************************************************************
  * Project    ：Coupler
- * Version    ：1.0.0
+ * Version    ：1.1.0
  * File       ：DEM生成器
- * Date       ：03/23/2023
+ * Date       ：09/19/2023
  * Author     ：梁小光
  * Copyright  ：福州水字节科技有限公司
  *******************************************************************************
@@ -12,7 +12,6 @@
 #include <random>
 #include <fstream>
 #include <sstream>
-#include <cassert>
 
 #include "couplefun.h"
 

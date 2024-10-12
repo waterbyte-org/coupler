@@ -1,9 +1,9 @@
 /*
  *******************************************************************************
  * Project    ：Coupler
- * Version    ：1.0.0
+ * Version    ：1.1.0
  * File       ：耦合接口
- * Date       ：03/23/2023
+ * Date       ：09/19/2023
  * Author     ：梁小光
  * Copyright  ：福州水字节科技有限公司
  *******************************************************************************
@@ -35,16 +35,15 @@ extern "C" {
 		double min_elev, double max_elev);
 
 	DLL_API bool __stdcall onlineCouple(INetwork* inited_net, 
-		IFlood* inited_flood, IGeoprocess* geo, double pv_threshold = 0.01);
+		IFlood* inited_flood, IGeoprocess* geo);
 
 	DLL_API int __stdcall partialOnlineCouple(INetwork* net_copy, 
 		const char* geo_file, const char* work_directory, 
-		const char* out_directory, const char* setup_file, 
-		double pv_threshold = 0.01);
+		const char* out_directory, const char* setup_file);
 
 	DLL_API int __stdcall offlineCouple(const char* inp_file, 
 		const char* work_directory, const char* out_directory, 
-		const char* setup_file, double pv_threshold = 0.01);
+		const char* setup_file);
 
 #ifdef __cplusplus
 }
